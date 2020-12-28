@@ -71,13 +71,14 @@ render() {
         <div>
             <TodosModal/>
             <table>
-                <tbody>
+                <tbody> TODO LIST
                 {this.props.todos.map((item,index)=>(
                         
                         <tr key={index} className='user'>
-                            {item.edit === false ?
-                                <td style={{color:'green'}} onClick={()=>this.changeIndex(index)}>{item.title}</td>
-                                :
+                            {/* {item.edit === false ? */}
+                                <td style={{color:'green'}} onClick={()=>this.changeIndex(index)}>Title: {item.title}</td>
+                                <td style={{color:'green'}}>{item.completed ? 'Status : Incomplete' : 'Status : Complete' }</td>
+                                {/* :
                                 <td>
                                 <input 
                                     type='text'
@@ -88,7 +89,7 @@ render() {
                                 <button onClick={()=>this.update(index)}>Save</button>
                             </td>
                                
-                        }
+                        } */}
                             
                             <td><button onClick={()=>this.remove(index)}>delete</button></td>
                         </tr>

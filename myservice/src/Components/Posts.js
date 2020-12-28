@@ -72,7 +72,8 @@ export class Posts extends Component {
                     {posts.map((item,index)=>(
                         <tr key={index} className='user'>
                             {item.edit === false ?
-                            <td style={{color:'green'}} onClick={()=>this.changeIndex(index)}>{item.title} </td>
+                            <td style={{color:'green'}} onClick={()=>this.changeIndex(index)}>{item.title}{item.body} </td>
+                            // <td>{item.body}</td>
                             :
                             <td>
                                 <input 

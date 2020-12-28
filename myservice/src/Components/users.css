@@ -1,0 +1,17 @@
+
+.title{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid green;
+}
+.data{
+    display: flex;
+    border: 1px solid blue;
+}
+.top{
+    display: flex;
+    height: 56px;
+    width: 755px;
+    border: 1px solid green;
+    background-color: aliceblue;
+}
