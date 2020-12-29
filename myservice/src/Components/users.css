@@ -15,3 +15,7 @@
     border: 1px solid green;
     background-color: aliceblue;
 }
+.map{
+    display: flex;
+    border: 1px solid red;
+}

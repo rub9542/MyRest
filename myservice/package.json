@@ -7,6 +7,9 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.0",
+    "google-maps-react": "^2.0.6",
+    "postcss": "^8.2.1",
+    "postcss-plugins": "^1.13.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
@@ -22,8 +25,8 @@
   "scripts": {
     "build:css": "postcss src/tailwind.css -o src/index.css",
     "watch:css": "postcss src/tailwind.css -o src/index.css -w",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm run watch:css & react-scripts start",
+    "build": "npm run build:css & react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -48,6 +51,14 @@
   "devDependencies": {
     "autoprefixer": "^10.1.0",
     "postcss-cli": "^8.3.1",
+    "postcss-load-config": "^3.0.0",
     "tailwindcss": "^2.0.2"
+  },
+  "postcss": {
+    "parser": "sugarss",
+    "map": false,
+    "plugins": {
+      "postcss-plugin": {}
+    }
   }
 }

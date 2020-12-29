@@ -12,12 +12,20 @@ import Todos from './Components/todos';
 import Users from './Components/users';
 import Profile from './Components/Profile';
 import {BrowserRouter as Router} from 'react-router-dom'
+import Homepage  from './Components/Homepage';
 
 function App() {
   return (
-    <div className="App"><Router>
+    <div className="App" className='bg-blue'>
+      {/* <Router> */}
       {/* <div className='content'> */}
-        <Users/>
+        {/* <Users /> */}
+        <Homepage/>
+        {/* <Profile/> */}
+        {/* <Posts/> */}
+        {/* <Photos/> */}
+        {/* <Comments/> */}
+        {/* <Albums/> */}
       {/* <div className='top'><Nav/></div>
       <div className='body'> <Profile/></div> */}
       {/* </div> */}
@@ -31,7 +39,7 @@ function App() {
       </div>
      
          </Router> */}
-          </Router>
+          {/* </Router> */}
     </div>
   );
 }

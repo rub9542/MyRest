@@ -69,32 +69,31 @@ export class Comments extends Component {
         console.log('elements are',comments)
         return (
             <div>
-                <CommentsModal/>
-                <table>
-                    <tbody>
+                Comments:
+                {/* <CommentsModal/> */}
+                
                         {comments.map((item,index)=>(
-                            <tr key={index} className='user'>
-                                {item.edit === false ?
-                                    <td onClick={()=>this.changeIndex(index)} style={{color:'green'}}  ><p>{item.name}</p>
-                                    </td>
-                                    :
-                                    <td>
-                                        <input 
-                                            type='text'
-                                            placeholder={item.title}
-                                            value={this.state.title}
-                                            onChange={(event)=> this.setState({title:event.target.value})}
-                                            />
-                                        <button onClick={()=>this.update(index)}>Save</button>
-                                    </td>                            
-                            }
-                           
-                           <td><button className='delete' onClick={()=>this.remove(index)} >Delete</button></td>
-                        </tr>
+                            <section class="text-gray-600 body-font overflow-hidden" key={index}>
+                            <div class="container px-5 py-24 mx-auto">
+                              <div class="-my-8 divide-y-2 divide-gray-100">
+                                <div class="py-8 flex flex-wrap md:flex-nowrap">
+                                  <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                                    <span class="font-semibold title-font text-gray-700">{item.email}</span>
+                                  </div>
+                                  <div class="md:flex-grow">
+                                    <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{item.name}</h2>
+                                    <p class="leading-relaxed">{item.body}</p>
+                                  
+                                  </div>
+                                </div>
+                               
+                            
+                              </div>
+                            </div>
+                          </section>
                     
                     ))}
-                </tbody>
-            </table>
+               
                        
                     
             </div>

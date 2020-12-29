@@ -19,7 +19,7 @@ constructor(props) {
 
 
 async getList () {
-    const url ='https://jsonplaceholder.typicode.com/users/1/todos';
+    const url ='https://jsonplaceholder.typicode.com/users/'+this.props.item+'/todos';
     const response = await fetch(url);
     const data = await response.json();
     for(let i=0; i<data.length; i++){

@@ -15,10 +15,11 @@ const userReducer = (state=INITIAL_STATE, action) =>{
         case 'USER_UPDATE':
             const temp1=state.users[action.index]
             temp1.name=action.payload
+            const items=[...state.users]
             console.log('user updated',action.payload);
             return{
                 ...state,
-                users:state.users
+                users:items
             }
         case 'USER_EDIT':
             const List1=state.users[action.index];
