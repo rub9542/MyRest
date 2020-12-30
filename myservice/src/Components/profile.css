@@ -12,3 +12,18 @@
     flex-direction: column-reverse;
 }
  */
+#blog{
+    display: flex;
+    /* border: 1px solid; */
+    border-radius: 10px;
+    margin-left: 100px;
+}
+#blog:hover{
+    background-color:steelblue;
+    color:ghostwhite;
+}
+/* #blog?? */
+#blog1:hover{
+    background-color:steelblue;
+    color:ghostwhite;
+}

@@ -69,19 +69,18 @@ export class Comments extends Component {
         console.log('elements are',comments)
         return (
             <div>
-                Comments:
                 {/* <CommentsModal/> */}
                 
                         {comments.map((item,index)=>(
                             <section class="text-gray-600 body-font overflow-hidden" key={index}>
                             <div class="container px-5 py-24 mx-auto">
                               <div class="-my-8 divide-y-2 divide-gray-100">
-                                <div class="py-8 flex flex-wrap md:flex-nowrap">
+                                <div class="py-8 flex flex-wrap md:flex-nowrap" id='blog'>
                                   <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                                    <span class="font-semibold title-font text-gray-700">{item.email}</span>
+                                    <span class="font-semibold title-font ">{item.email}</span>
                                   </div>
                                   <div class="md:flex-grow">
-                                    <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{item.name}</h2>
+                                    <h2 class="text-2xl font-medium  title-font mb-2">{item.name}</h2>
                                     <p class="leading-relaxed">{item.body}</p>
                                   
                                   </div>

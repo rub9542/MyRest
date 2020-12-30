@@ -9,6 +9,8 @@ import { Map, GoogleApiWrapper } from 'google-maps-react';
 import user from '../user.webp';
 import { myUsers,editUser , useredit} from '../Actions/index';
 import Usermodal from './usermodal';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+// import { Link, Router } from 'react-router-dom';
 
 export class Users extends Component {
     constructor(props) {
@@ -64,14 +66,18 @@ export class Users extends Component {
         })
     }
     render() {
-        const item=this.props.item
+        const item=this.props.index
         console.log('item recieved', item);
-        const users = this.props.users.filter(x=> x.id=== item);
+        const users = this.props.users.filter(x => x.id === item);
         // .filter(x=> x.id=== item);
         // const user= users.filter((item)=> item.id === 1)
         console.log('user enabled',users)
         return (
             <div >
+              
+
+
+
                 <section class="text-gray-600 body-font">
   <div class="container px-5 py-24 mx-auto flex flex-col">
     <div class="lg:w-4/6 mx-auto">
@@ -79,7 +85,7 @@ export class Users extends Component {
         <img alt="content" class="object-cover object-center h-full w-full" src="https://dummyimage.com/1200x500"/>
       </div> */}
       {users.map((item,index)=>(
-      <div class="flex flex-col sm:flex-row mt-10">
+      <div class="flex flex-col sm:flex-row mt-10" key={index}>
         <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
           <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">
@@ -131,10 +137,12 @@ const mapStateToProps = state =>{
     // const {users} = state.user;
     // const {posts} = state.posts;
     const {users} = state.users;
+    const {index} = state.index
     // const {photos} = state.;
     // const {todos} = state.todos;
     return{
         users,
+        index,
     }
 }
 const mapDispatchToProps = (dispatch) =>{

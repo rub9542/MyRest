@@ -1,3 +1,10 @@
+export const myIndex = (payload)=>{
+    return{
+        type:'INDEX_PART',
+        payload,
+    }
+}
+
 export const myPosts = (items) =>{
     return    {
         type: 'POSTS_ADDED',

@@ -16,7 +16,7 @@ import Homepage  from './Components/Homepage';
 
 function App() {
   return (
-    <div className="App" className='bg-blue'>
+    <div className="App" >
       {/* <Router> */}
       {/* <div className='content'> */}
         {/* <Users /> */}

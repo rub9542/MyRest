@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './profile.css';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import  Albums  from './Albums';
 import  Posts  from './Posts';
@@ -17,6 +17,7 @@ class Profile extends Component {
              todos:'',
              albums:'',
              photos:'',
+             show:false,
         }
     }
     content = (data) =>{
@@ -58,98 +59,99 @@ class Profile extends Component {
 
     }
     render() {
-        const item=this.props.index
+        const item=this.props.index;
         console.log('item profile recieved', item);
         const posts=this.props.posts;
-        console.log('posts',posts);
+        const postlen=posts.length;
+        const todos=this.props.todos;
+        const todolen= todos.length;
+        const albums=this.props.albums;
+        const albumlen= albums.length;
+        const photos=this.props.photos;
+        const photolen= photos.length;
+        console.log('total posts',posts);
         return (
             <div>
-            <Users item={item}/>
+              
+              {/* <button id='blog' onClick={()=> this.setState({show:!this.state.show})}><h2 class="tracking-widest text-xl title-font mb-1" >User Acivities</h2></button> */}
+            <Users />
+            
+            {this.state.show !== false ?
             <section class="text-gray-600 body-font">
             <div class="container px-5 py-24 mx-auto">
               <div class="flex flex-wrap -mx-4 -my-8">
-                <div class="py-8 px-4 lg:w-1/3">
-                  <div class="h-full flex items-start">
-                    <div class="w-12 flex-shrink-0 flex flex-col text-center leading-none">
+                <div class="py-8 px-4 lg:w-1/3" id='blog'>
+                  {/* <div class="h-full flex items-start"> */}
+                    {/* <div class="w-12 flex-shrink-0 flex flex-col text-center leading-none">
                       <span class="text-gray-500 pb-2 mb-2 border-b-2 border-gray-200">Jul</span>
                       <span class="font-medium text-lg text-gray-800 title-font leading-none">18</span>
+                    </div> */}
+                    {/* <Link to='/posts'> */}
+                    <div class="flex-grow pl-6" onClick={()=>this.content('posts')}>
+                      <h2 class="tracking-widest text-xl title-font mb-1" id='text' >Posts</h2>
+                      <h1 class="title-font text-xl font-medium  mb-3" id='text'>{this.props.name} has {postlen} Posts</h1>
+                      <p class="leading-relaxed mb-5" id='text'>Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                      
                     </div>
-                    <div class="flex-grow pl-6" onClick={(event)=>this.content('posts')}>
-                      <h2 class="tracking-widest text-xs title-font font-medium text-indigo-500 mb-1">Posts</h2>
-                      <h1 class="title-font text-xl font-medium text-gray-900 mb-3">The 400 Blows</h1>
-                      <p class="leading-relaxed mb-5">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                      <a class="inline-flex items-center">
-                        <img alt="blog" src="https://dummyimage.com/103x103" class="w-8 h-8 rounded-full flex-shrink-0 object-cover object-center"/>
-                        <span class="flex-grow flex flex-col pl-3">
-                          <span class="title-font font-medium text-gray-900">Alper Kamu</span>
-                        </span>
-                      </a>
+                    {/* </Link> */}
+                  {/* </div> */}
+                </div>
+                <div class="py-8 px-4 lg:w-1/3" id='blog'>
+                  <div class="h-full flex items-start">
+                    {/* <div class="w-12 flex-shrink-0 flex flex-col text-center leading-none">
+                      <span class="text-gray-500 pb-2 mb-2 border-b-2 border-gray-200">Jul</span>
+                      <span class="font-medium text-lg text-gray-800 title-font leading-none">18</span>
+                    </div> */}
+                     {/* <Link to='/todos'> */}
+                    <div class="flex-grow pl-6" onClick={()=>this.content('todos')}>
+                      <h2 class="tracking-widest text-xl title-font  mb-1"id='text'>Todos</h2>
+                      <h1 class="title-font text-xl font-medium  mb-3"id='text'>{this.props.name} has {todolen} Todos Data</h1>
+                      <p class="leading-relaxed mb-5"id='text'>Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                     
                     </div>
+                    {/* </Link> */}
                   </div>
                 </div>
-                <div class="py-8 px-4 lg:w-1/3">
+                <div class="py-8 px-4 lg:w-1/3 ml-1 mt-5" id='blog'>
                   <div class="h-full flex items-start">
-                    <div class="w-12 flex-shrink-0 flex flex-col text-center leading-none">
+                    {/* <div class="w-12 flex-shrink-0 flex flex-col text-center leading-none">
                       <span class="text-gray-500 pb-2 mb-2 border-b-2 border-gray-200">Jul</span>
                       <span class="font-medium text-lg text-gray-800 title-font leading-none">18</span>
+                    </div> */}
+                     {/* <Link to='/albums'> */}
+                    <div class="flex-grow pl-6" onClick={()=>this.content('albums')}>
+                      <h2 class="tracking-widest text-xl title-font  mb-1"id='text'>Albums</h2>
+                      <h1 class="title-font text-xl font-medium  mb-3"id='text'>{this.props.name} has {albumlen} Album Data</h1>
+                      <p class="leading-relaxed mb-5"id='text'>Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                      
                     </div>
-                    <div class="flex-grow pl-6" onClick={(event)=>this.content('todos')}>
-                      <h2 class="tracking-widest text-xs title-font font-medium text-indigo-500 mb-1">Todos</h2>
-                      <h1 class="title-font text-xl font-medium text-gray-900 mb-3">The 400 Blows</h1>
-                      <p class="leading-relaxed mb-5">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                      <a class="inline-flex items-center">
-                        <img alt="blog" src="https://dummyimage.com/103x103" class="w-8 h-8 rounded-full flex-shrink-0 object-cover object-center"/>
-                        <span class="flex-grow flex flex-col pl-3">
-                          <span class="title-font font-medium text-gray-900">Alper Kamu</span>
-                        </span>
-                      </a>
-                    </div>
+                    {/* </Link> */}
                   </div>
                 </div>
-                <div class="py-8 px-4 lg:w-1/3">
+                <div class="py-8 px-4 lg:w-1/3 mt-5" id='blog'>
                   <div class="h-full flex items-start">
-                    <div class="w-12 flex-shrink-0 flex flex-col text-center leading-none">
+                    {/* <div class="w-12 flex-shrink-0 flex flex-col text-center leading-none">
                       <span class="text-gray-500 pb-2 mb-2 border-b-2 border-gray-200">Jul</span>
                       <span class="font-medium text-lg text-gray-800 title-font leading-none">18</span>
+                    </div> */}
+                     {/* <Link to='/photos'> */}
+                    <div class="flex-grow pl-6" onClick={()=>this.content('photos')}>
+                      <h2 class="tracking-widest text-xl title-font    mb-1"id='text'>Photos</h2>
+                      <h1 class="title-font text-xl font-medium  mb-3"id='text'>{this.props.name} has {photolen} Photos</h1>
+                      <p class="leading-relaxed mb-5"id='text'>Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
+                     
                     </div>
-                    <div class="flex-grow pl-6" onClick={(event)=>this.content('albums')}>
-                      <h2 class="tracking-widest text-xs title-font font-medium text-indigo-500 mb-1">Albums</h2>
-                      <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Shooting Stars</h1>
-                      <p class="leading-relaxed mb-5">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                      <a class="inline-flex items-center">
-                        <img alt="blog" src="https://dummyimage.com/102x102" class="w-8 h-8 rounded-full flex-shrink-0 object-cover object-center"/>
-                        <span class="flex-grow flex flex-col pl-3">
-                          <span class="title-font font-medium text-gray-900">Holden Caulfield</span>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="py-8 px-4 lg:w-1/3">
-                  <div class="h-full flex items-start">
-                    <div class="w-12 flex-shrink-0 flex flex-col text-center leading-none">
-                      <span class="text-gray-500 pb-2 mb-2 border-b-2 border-gray-200">Jul</span>
-                      <span class="font-medium text-lg text-gray-800 title-font leading-none">18</span>
-                    </div>
-                    <div class="flex-grow pl-6" onClick={(event)=>this.content('photos')}>
-                      <h2 class="tracking-widest text-xs title-font font-medium text-indigo-500 mb-1">Photos</h2>
-                      <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Neptune</h1>
-                      <p class="leading-relaxed mb-5">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p>
-                      <a class="inline-flex items-center">
-                        <img alt="blog" src="https://dummyimage.com/101x101" class="w-8 h-8 rounded-full flex-shrink-0 object-cover object-center"/>
-                        <span class="flex-grow flex flex-col pl-3">
-                          <span class="title-font font-medium text-gray-900">Henry Letham</span>
-                        </span>
-                      </a>
-                    </div>
+                    {/* </Link> */}
                   </div>
                 </div>
               </div>
             </div>
-          </section>
+          </section> 
+          :
+           null}
           
-            {this.state.posts!== '' ? 
-                <Posts item={item}/>: null
+            {/* {this.state.posts!== '' ? 
+                <Posts item={this.props.index}/>: null
             }
             {this.state.todos !=='' ?
                 <Todos item={item}/>   : null 
@@ -159,7 +161,7 @@ class Profile extends Component {
         }
         {this.state.photos !=='' ?
                 <Photos item={item} />    : null
-        }
+        } */}
           </div>
         )
     }
@@ -174,9 +176,9 @@ const mapStateToProps = state =>{
     const {todos} = state.todos;
     return{
         posts,
-        // albums,
-        // photos,
-        // todos
+        albums,
+        photos,
+        todos,
     }
 }
 

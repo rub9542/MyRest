@@ -19,7 +19,7 @@ export class Photos extends Component {
     
    
     async getList () {
-        const url ='https://jsonplaceholder.typicode.com/albums/1/photos';
+        const url ='https://jsonplaceholder.typicode.com/albums/'+this.props.index+'/photos';
         const response = await fetch(url);
         const data = await response.json();
         this.setState({
@@ -49,25 +49,77 @@ export class Photos extends Component {
         return (
             <div>
                 {/* <PhotosModal/> */}
-                {photos.map((item,index)=>(
-                       <section class="text-gray-600 body-font" key={index}>
+                
+                       {/* <section class="text-gray-600 body-font" >
                        <div class="container px-5 py-24 mx-auto">
+                       {photos.map((item,index)=>(
                          <div class="flex flex-wrap -m-4">
-                           <div class="p-4 md:w-1/3">
+                        
+                           <div class="p-4 md:w-1/3" key={index}>
                              <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                                <img class="lg:h-48 md:h-36 w-full object-cover object-center" src={item.url} alt="blog"/>
                                <div class="p-6">
-                                 <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
                                  <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{item.title}</h1>
                                  
                                </div>
                              </div>
                            </div>
+                           </div>))}
                            </div>
-                           </div>
-                     </section>
+                     </section> */}
                        
-                    ))}
+                     <section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-col">
+      <div class="h-1 bg-gray-200 rounded overflow-hidden">
+        <div class="w-24 h-full bg-indigo-500"></div>
+      </div>
+      <div class="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
+        <h1 class="sm:w-2/5 text-gray-900 font-medium title-font text-2xl mb-2 sm:mb-0">Space The Final Frontier</h1>
+        <p class="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">Street art subway tile salvia four dollar toast bitters selfies quinoa yuccie synth meditation iPhone intelligentsia prism tofu. Viral gochujang bitters dreamcatcher.</p>
+      </div>
+    </div>
+    <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
+    {photos.map((item,index)=>(
+      <div class="p-4 md:w-1/3 sm:mb-0 mb-6" key={index}>
+        <div class="rounded-lg h-64 overflow-hidden">
+          <img alt="content" class="object-cover object-center h-full w-full" src={item.url}/>
+        </div>
+        <h2 class="text-xl font-medium title-font text-gray-900 mt-5">Shooting Stars</h2>
+        <p class="text-base leading-relaxed mt-2">Swag shoivdigoitch literally meditation subway tile tumblr cold-pressed. Gastropub street art beard dreamcatcher neutra, ethical XOXO lumbersexual.</p>
+        <a class="text-indigo-500 inline-flex items-center mt-3">Learn More
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>))}
+      <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
+        <div class="rounded-lg h-64 overflow-hidden">
+          <img alt="content" class="object-cover object-center h-full w-full" src="https://dummyimage.com/1204x504"/>
+        </div>
+        <h2 class="text-xl font-medium title-font text-gray-900 mt-5">The Catalyzer</h2>
+        <p class="text-base leading-relaxed mt-2">Swag shoivdigoitch literally meditation subway tile tumblr cold-pressed. Gastropub street art beard dreamcatcher neutra, ethical XOXO lumbersexual.</p>
+        <a class="text-indigo-500 inline-flex items-center mt-3">Learn More
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+      <div class="p-4 md:w-1/3 sm:mb-0 mb-6">
+        <div class="rounded-lg h-64 overflow-hidden">
+          <img alt="content" class="object-cover object-center h-full w-full" src="https://dummyimage.com/1205x505"/>
+        </div>
+        <h2 class="text-xl font-medium title-font text-gray-900 mt-5">The 400 Blows</h2>
+        <p class="text-base leading-relaxed mt-2">Swag shoivdigoitch literally meditation subway tile tumblr cold-pressed. Gastropub street art beard dreamcatcher neutra, ethical XOXO lumbersexual.</p>
+        <a class="text-indigo-500 inline-flex items-center mt-3">Learn More
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
                        
                     
             </div>
@@ -79,9 +131,10 @@ const mapStateToProps = state =>{
     // const {posts} = state.posts;
     // const {albums} = state.albums;
     const {photos} = state.photos;
-    // const {todos} = state.todos;
+    const {index} = state.index;
     return{
         photos,
+        index,
     }
 }
 const mapDispatchToProps = (dispatch) =>{

@@ -13,6 +13,7 @@ import postsReducer from './reducers/postsReducer'
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {combineReducers} from 'redux';
+import indexReducer from './reducers/indexReducer';
 
 const rootReducer= combineReducers({
   comments:commentsReducer,
@@ -21,6 +22,7 @@ const rootReducer= combineReducers({
   photos:photosReducer,
   albums:albumReducer,
   users:userReducer,
+  index:indexReducer,
 })
 // store=createStore(todoReducer)
 ReactDOM.render(

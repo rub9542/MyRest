@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import './base.css';
+import './profile.css';
 import {connect} from 'react-redux';
 import { myPosts, postedit, updatePosts } from '../Actions';
 // import posts from './posts';
@@ -23,7 +23,7 @@ export class Posts extends Component {
     
    
     async getList () {
-        const url ='https://jsonplaceholder.typicode.com/users/'+this.props.item+'/posts';
+        const url ='https://jsonplaceholder.typicode.com/users/'+this.props.index+'/posts';
         const response = await fetch(url);
         const data = await response.json();
         
@@ -75,14 +75,14 @@ export class Posts extends Component {
 
     }
     render() {
-        // const pointer =this.props.item
+        const postindex =this.props.index
         // console.log('pointer', pointer);
         // this.setState({
         //     point:pointer
         // })
         const posts = this.props.posts;
-        const users=this.props.users.filter((item)=> item.name ==='Leanne Graham');
-        const name=users.name;
+        // const users=this.props.users.filter((item)=> item.id === postindex);
+        // const name=users.name;
         console.log('posts are', posts);
         return (
             <div>
@@ -94,9 +94,9 @@ export class Posts extends Component {
 <section class="text-gray-600 body-font overflow-hidden" key={index}>
   <div class="container px-5 py-24 mx-auto">
     <div class="-my-8 divide-y-2 divide-gray-100">
-      <div class="py-8 flex flex-wrap md:flex-nowrap">
+      <div class="py-8 flex flex-wrap md:flex-nowrap"  >
         <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-          <span class="font-semibold title-font text-gray-700">{name}</span>
+          {/* <span class="font-semibold title-font text-gray-700">{name}</span> */}
           {/* <span class="mt-1 text-gray-500 text-sm">12 Jun 2019</span> */}
         </div>
         <div class="md:flex-grow">
@@ -109,7 +109,7 @@ export class Posts extends Component {
             </svg>
           </a>
           {this.state.edit !==false? 
-                <Comments index={this.state.point} />    : null
+                <Comments index={this.props.item} />    : null
         }  
         </div>
       </div>
@@ -128,9 +128,11 @@ export class Posts extends Component {
 const mapStateToProps = state =>{
     const {posts} =state.posts;
     const {users}= state.users;
+    const {index} =state.index;
     return{
         posts,
         users,
+        index,
     }
 }
 const mapDispatchToProps = (dispatch) =>{
