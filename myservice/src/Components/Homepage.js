@@ -122,19 +122,22 @@ export class Homepage extends Component {
   <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     
     <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+    <Link to='/user'>
+        <a class="mr-5 hover:text-gray-900">Profile</a>
+      </Link>
       <Link to='/posts'>
-        <a class="mr-5 hover:text-gray-900">Posts</a>
+        <a class="mr-5 hover:text-gray-900">Posts({this.props.posts.length})</a>
       </Link>
       <Link to='/albums'>
-        <a class="mr-5 hover:text-gray-900">Albums</a>
+        <a class="mr-5 hover:text-gray-900">Albums({this.props.albums.length})</a>
       </Link>
       <Link to='/photos'>
-        <a class="mr-5 hover:text-gray-900">Photos</a></Link>
+        <a class="mr-5 hover:text-gray-900">Photos({this.props.photos.length})</a></Link>
       <Link to='/todos'>
-        <a class="mr-5 hover:text-gray-900">Todo List</a>
+        <a class="mr-5 hover:text-gray-900">Todo List({this.props.todos.length})</a>
       </Link>
     {/* <Link to='/'> */}
-    <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" onClick={()=>this.setState({ modal:!this.state.modal})}>Button
+    <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" onClick={()=>this.setState({ modal:!this.state.modal})}>Home
       <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
         <path d="M5 12h14M12 5l7 7-7 7"></path>
       </svg>
@@ -148,15 +151,16 @@ export class Homepage extends Component {
                             <Route path='/posts' exact component={Posts} />
                             <Route path='/photos' exact component={Photos} />
                             <Route path='/todos' exact component={Todos} />
-                            {/* <Route path='/' exact component={Homepage} /> */}
+                            <Route path='/user' exact component={Profile } />
                             {/* <Route path='/' exact component={} /> */}
                            
                         </Switch>
-                    <Profile/></Router>
+                    {/* <Profile/> */}
+                    </Router>
                 </Modal>
-                {this.state.item !=='' ?
+                {/* {this.state.item !=='' ?
                         <Profile index={this.state.item} name={this.state.name} /> : null
-                        }
+                        } */}
             </div></nav>
         )
     }
@@ -165,15 +169,19 @@ export class Homepage extends Component {
 
 
 const mapStateToProps = state =>{
-    // const {users} = state.user;
-    // const {posts} = state.posts;
+    const {albums} = state.albums;
+    const {posts} = state.posts;
     const {users} = state.users;
     const {index} = state.index;
-    // const {photos} = state.;
-    // const {todos} = state.todos;
+    const {photos} = state.photos;
+    const {todos} = state.todos;
     return{
         users,
         index,
+        photos,
+        todos,
+        posts,
+        albums,
     }
 }
 const mapDispatchToProps = (dispatch) =>{

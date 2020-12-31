@@ -18,6 +18,7 @@ export class Posts extends Component {
             point:'',
             edit:false,
             title:'',
+            body:'',
         }
     }
     
@@ -81,8 +82,9 @@ export class Posts extends Component {
         //     point:pointer
         // })
         const posts = this.props.posts;
-        // const users=this.props.users.filter((item)=> item.id === postindex);
-        // const name=users.name;
+        const users=this.props.users.filter((item)=> item.id === this.props.index);
+        console.log('post user', users.id);
+        const name=users.name;
         console.log('posts are', posts);
         return (
             <div>
@@ -91,18 +93,19 @@ export class Posts extends Component {
                 {posts.map((item,index)=>(
                 
 
-<section class="text-gray-600 body-font overflow-hidden" key={index}>
-  <div class="container px-5 py-24 mx-auto">
+<section class="text-gray-600 body-font overflow-hidden" key={index} >
+  <div class="container px-5 py-24 mx-auto hover:bg-gray-200" id='blog2' >
     <div class="-my-8 divide-y-2 divide-gray-100">
       <div class="py-8 flex flex-wrap md:flex-nowrap"  >
         <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-          {/* <span class="font-semibold title-font text-gray-700">{name}</span> */}
-          {/* <span class="mt-1 text-gray-500 text-sm">12 Jun 2019</span> */}
+          <span class="font-semibold title-font text-gray-700">{name}</span>
+          <h2  id='blog1' onClick={()=>this.remove(index)}>Delete</h2>
+          <h2 class="leading-relaxed" id='blog1' onClick={()=>this.changeIndex(index)}>Edit</h2>
         </div>
         <div class="md:flex-grow">
-          <h2 class="text-2xl font-medium text-gray-900 title-font mb-2"><p style={{color:'purple'}}>{item.title}</p></h2>
+          <h2 class="text-2xl font-medium text-gray-900 title-font mb-2"><p style={{color:'purple'}}>{item.title}</p></h2>{item.edit=== 'false'}
           <p class="leading-relaxed">{item.body}</p>
-          <a class="text-indigo-500 inline-flex items-center mt-4" onClick={()=>this.comments(index)}>Comments
+          <a class="text-indigo-500 inline-flex items-center mt-4" id='blog1' onClick={()=>this.comments(index)}>Comments
             <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14"></path>
               <path d="M12 5l7 7-7 7"></path>

@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import axios from 'axios'
-import './base.css';
+import './profile.css';
 import {connect} from 'react-redux';
 import { todoedit, myTodos, editTodos  } from '../Actions/index';
 import TodosModal from './TodosModal';
@@ -83,42 +83,11 @@ render() {
                           </div>
                           <div class="flex flex-wrap">
                           {todos.map((item,index)=>( 
-                            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60"key={index} >
-                              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">{item.title}</h2>
-                              {/* <p class="leading-relaxed text-base mb-4">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p> */}
-                              {/* <a class="text-indigo-500 inline-flex items-center">Learn More
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                </svg>
-                              </a> */}
+                            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60" key={index} id='blog' >
+                              <h2 class="text-lg sm:text-xl  font-medium title-font mb-2">{item.title}</h2>
+                              <h2 class="leading-relaxed text-base mb-4">{item.completed === false ? 'Status : Pending' : 'Status : Complete'}</h2>
+                              
                             </div>))}
-                            {/* <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
-                              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">The Catalyzer</h2>
-                              <p class="leading-relaxed text-base mb-4">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
-                              <a class="text-indigo-500 inline-flex items-center">Learn More
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                </svg>
-                              </a>
-                            </div> */}
-                            {/* <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
-                              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Neptune</h2>
-                              <p class="leading-relaxed text-base mb-4">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
-                              <a class="text-indigo-500 inline-flex items-center">Learn More
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                </svg>
-                              </a>
-                            </div> */}
-                            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
-                              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Melanchole</h2>
-                              <p class="leading-relaxed text-base mb-4">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
-                              <a class="text-indigo-500 inline-flex items-center">Learn More
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                </svg>
-                              </a>
-                            </div>
                           </div>
                           <button class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
                         </div>

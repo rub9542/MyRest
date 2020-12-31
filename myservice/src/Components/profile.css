@@ -14,16 +14,36 @@
  */
 #blog{
     display: flex;
+    justify-content: space-between;
     /* border: 1px solid; */
     border-radius: 10px;
     margin-left: 100px;
 }
 #blog:hover{
     background-color:steelblue;
+    
     color:ghostwhite;
 }
-/* #blog?? */
+#blog1{
+    /* border: 1px solid ; */
+    border-radius: 20px;
+    cursor: pointer;
+    width: 88px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 2px 2px 4px gray;
+}
 #blog1:hover{
     background-color:steelblue;
-    color:ghostwhite;
+    color:white;
+}
+#blog2{
+    cursor: pointer;
+    box-shadow: 2px 2px 4px gray, 0px 0px 4px gray;
+    margin-bottom: 3px;
+    /* background-color:crimson; */
+}
+#blog2:hover{
+    background-color:cadetblue;
+    color:purple;
 }
