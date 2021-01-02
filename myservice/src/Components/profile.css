@@ -14,10 +14,13 @@
  */
 #blog{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     /* border: 1px solid; */
     border-radius: 10px;
     margin-left: 100px;
+    cursor: pointer;
+    width: 88px;
+    box-shadow: 2px 2px 4px gray;
 }
 #blog:hover{
     background-color:steelblue;
@@ -28,22 +31,56 @@
     /* border: 1px solid ; */
     border-radius: 20px;
     cursor: pointer;
-    width: 88px;
+    /* width: 88px; */
     display: flex;
     justify-content: center;
     box-shadow: 2px 2px 4px gray;
 }
 #blog1:hover{
-    background-color:steelblue;
+    background-color:rgb(99, 70, 180);
     color:white;
 }
 #blog2{
     cursor: pointer;
-    box-shadow: 2px 2px 4px gray, 0px 0px 4px gray;
+    border-radius: 10px;
+    /* color: #ffffff; */
+    box-shadow: 2px 4px 4px rgb(148, 155, 144);
     margin-bottom: 3px;
-    /* background-color:crimson; */
+    /* background-color:; */
 }
 #blog2:hover{
-    background-color:cadetblue;
-    color:purple;
+    background-color:rgb(107, 95, 160);
+    color:rgb(217, 222, 224);
+}
+#blog2:hover #close1{
+    display: flex;
+}
+#blog3{
+    cursor: pointer;
+    border-radius: 10px;
+    color: #ffffff;
+    box-shadow: 2px 2px 4px gray;
+    margin-bottom: 3px;
+}
+.blog3:hover{
+    background-color:rgb(107, 95, 160);
+    color:rgb(217, 222, 224);
+
+}
+.container{
+    /* display: flex; */
+    /* border: 1px solid; */
+    border-radius: 20px;
+    background-color: ghostwhite;
+  }
+.container:hover .close{
+    opacity: 1;
+    /* display: flex; */
+}
+.close{
+    /* display: none; */
+    opacity: 0;
+}
+#close1{
+    display: none;
 }

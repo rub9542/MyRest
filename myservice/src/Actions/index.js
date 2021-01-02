@@ -17,11 +17,12 @@ export const addPosts = (items) =>{
             payload:items
     }
 }
-export const updatePosts = (payload, index) =>{
+export const updatePosts = (title,body, index) =>{
     return    {
         type: 'POSTS_UPDATED',
-            payload,
-            index
+            title,
+            body,
+            index,
         }
 }
 export const postedit = (index) =>{

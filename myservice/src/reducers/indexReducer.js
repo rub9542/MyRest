@@ -7,7 +7,6 @@ const indexReducer = (state=INITIAL_STATE, action)=>{
         case 'INDEX_PART':
             console.log('final index', action.payload);
             return{
-                ...state,
                 index:action.payload
             }
         default:return state

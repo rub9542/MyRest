@@ -32,12 +32,14 @@ const postsReducer = (state=INITIAL_STATE, action) =>{
                     posts:newList1
                 }
         case 'POSTS_UPDATED':
-            console.log('payload posts',action.payload);
-            const temp=state.posts[action.index]
-            temp.title=action.payload
+            console.log(' title payload',action.title);
+            let temp=state.posts[action.index];
+            temp.title=action.title;
+            temp.body=action.body;
+            const newList=state.posts;
             return{
                 ...state,
-                posts:state.posts
+                posts:newList
             }
         
         

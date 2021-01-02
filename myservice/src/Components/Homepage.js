@@ -4,9 +4,9 @@ import React, { Component, Profiler } from 'react';
 // import axios from 'axios'
 import Modal from 'react-modal'
 import '../App.css'
-import './users.css';
+import './profile.css';
 import {connect} from 'react-redux';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import {AiOutlineClose} from "react-icons/ai";
 import user from '../user.webp';
 import Profile from './Profile';
 import { myUsers,editUser , useredit, myIndex} from '../Actions/index';
@@ -92,7 +92,7 @@ export class Homepage extends Component {
         console.log('photos are',users)
         return (
             <nav>
-            <div className='container'>
+            <div className='container'> <Router>
                 <section >
                     <div class="container px-5 py-24 mx-auto">
                         <div class="flex flex-col text-center w-full mb-20">
@@ -102,22 +102,44 @@ export class Homepage extends Component {
                         <div class="flex flex-wrap -m-2">
                             {users.map((item,index)=>(
                                 <div class="p-2 lg:w-1/3 md:w-1/2 w-full" key={index} id='blog1' >
-                                    {/* <Link to='/user'> */}
+                                    <Link to='/user'>
                                         <div class="h-full flex items-center  p-4 rounded-lg" onClick={()=>this.chosen(item.name,index)}>
                                           <img  class="w-15 h-16 bg-gray-100    rounded-full mr-4" src={user}/>
                                           <div class="flex-grow">
-                                            <h2 class="text-gray-900 title-font font-medium">{item.name}</h2>
-                                            <p class="text-gray-500">{item.username}</p>
+                                            <h2 class="title-font font-medium">{item.name}</h2>
+                                            <p >{item.username}</p>
                                           </div>
+                                          <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    
+    <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+    <Link to='/user'>
+        <a class="mr-5 hover:text-gray-900">Profile</a>
+      </Link>
+      <Link to='/posts'>
+        <a class="mr-5 hover:text-gray-900">Posts({this.props.posts.length})</a>
+      </Link>
+      <Link to='/albums'>
+        <a class="mr-5 hover:text-gray-900">Albums({this.props.albums.length})</a>
+      </Link>
+      <Link to='/photos'>
+        <a class="mr-5 hover:text-gray-900">Photos({this.props.photos.length})</a></Link>
+      <Link to='/todos'>
+        <a class="mr-5 hover:text-gray-900">Todo List({this.props.todos.length})</a>
+      </Link>
+    {/* <Link to='/'> */}
+    
+    {/* </Link> */}
+    </nav>
+  </div>
                                         </div>
-                                    {/* </Link> */}
+                                    </Link> <div className='close' onClick={()=>this.remove(index)}><AiOutlineClose/></div>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </section>
                 <Modal isOpen={this.state.modal}>
-                    <Router>
+                   
                     <header class="text-gray-600 body-font">
   <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     
@@ -151,13 +173,13 @@ export class Homepage extends Component {
                             <Route path='/posts' exact component={Posts} />
                             <Route path='/photos' exact component={Photos} />
                             <Route path='/todos' exact component={Todos} />
-                            <Route path='/user' exact component={Profile } />
+                            <Route path='/user' exact component={Users} />
                             {/* <Route path='/' exact component={} /> */}
                            
                         </Switch>
                     {/* <Profile/> */}
-                    </Router>
-                </Modal>
+                   
+                </Modal> </Router>
                 {/* {this.state.item !=='' ?
                         <Profile index={this.state.item} name={this.state.name} /> : null
                         } */}

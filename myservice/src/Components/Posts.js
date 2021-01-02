@@ -1,5 +1,8 @@
+import Modal from 'react-modal'
+
 import React, { Component } from 'react';
 import axios from 'axios'
+import {AiOutlineClose} from "react-icons/ai";
 import './profile.css';
 import {connect} from 'react-redux';
 import { myPosts, postedit, updatePosts } from '../Actions';
@@ -14,11 +17,13 @@ export class Posts extends Component {
         //     border:'1px solid red';
         // }
         this.state = {
+            modal:false,
             text:[],
             point:'',
             edit:false,
             title:'',
             body:'',
+            index:'',
         }
     }
     
@@ -57,14 +62,26 @@ export class Posts extends Component {
         this.props.postedit(index)
     }
     update = (index)=>{
-        
+        console.log('save clicked', index)
         console.log('title',this.state.title);
-        this.props.updatePosts(this.state.title, index)
+        this.props.updatePosts(this.state.title, this.state.body, this.state.index)
         this.props.postedit(index);
         this.setState({
-            edit:false,
+            // edit:false,
             title:'',
+            body:'',
+            modal:!this.state.modal,
         })
+        // const posts = this.props.posts;
+        // for(let i=0; i<posts.length; i++){
+        //     if(i=== index){
+        //         console.log('i matched')
+        //         posts[i].title= this.state.title;
+        //         posts[i].body = this.state.body
+        //         console.log('i is', posts[i])
+        //     }
+        // }
+        // this.props.myPosts(posts);
     }
     comments = (index) =>{
         this.setState({
@@ -75,12 +92,16 @@ export class Posts extends Component {
         console.log('comments clicked',index);
 
     }
+    chosen = (index1) =>{
+        console.log('edit index', index1)
+        this.setState({
+            index:index1,
+            modal:!this.state.modal,
+        })
+        
+    }
     render() {
         const postindex =this.props.index
-        // console.log('pointer', pointer);
-        // this.setState({
-        //     point:pointer
-        // })
         const posts = this.props.posts;
         const users=this.props.users.filter((item)=> item.id === this.props.index);
         console.log('post user', users.id);
@@ -91,43 +112,62 @@ export class Posts extends Component {
                 {/* <PostsModal/> */}
                 <h1 class="md:text-3xl text-2xl font-medium title-font text-gray-900">Posts:</h1>
                 {posts.map((item,index)=>(
-                
-
-<section class="text-gray-600 body-font overflow-hidden" key={index} >
-  <div class="container px-5 py-24 mx-auto hover:bg-gray-200" id='blog2' >
-    <div class="-my-8 divide-y-2 divide-gray-100">
-      <div class="py-8 flex flex-wrap md:flex-nowrap"  >
-        <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-          <span class="font-semibold title-font text-gray-700">{name}</span>
-          <h2  id='blog1' onClick={()=>this.remove(index)}>Delete</h2>
-          <h2 class="leading-relaxed" id='blog1' onClick={()=>this.changeIndex(index)}>Edit</h2>
-        </div>
-        <div class="md:flex-grow">
-          <h2 class="text-2xl font-medium text-gray-900 title-font mb-2"><p style={{color:'purple'}}>{item.title}</p></h2>{item.edit=== 'false'}
-          <p class="leading-relaxed">{item.body}</p>
-          <a class="text-indigo-500 inline-flex items-center mt-4" id='blog1' onClick={()=>this.comments(index)}>Comments
-            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14"></path>
-              <path d="M12 5l7 7-7 7"></path>
-            </svg>
-          </a>
-          {this.state.edit !==false? 
-                <Comments index={this.props.item} />    : null
-        }  
-        </div>
-      </div>
-  
- 
-    </div>
-  </div>
-</section>))}
-           
-                    
+                    <section  key={index} >
+                        <div class="container px-5 py-24 mx-auto hover:bg-gray-200"  >
+                            <div class="-my-8 divide-y-2 divide-gray-100">
+                                <div class="py-8 flex flex-wrap md:flex-nowrap"  >
+                                    <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                                        <h2 class="leading-relaxed" id='blog' onClick={()=>this.chosen(index)}>Edit</h2>
+                                        <Modal isOpen={this.state.modal}>
+                                            <section class="text-gray-600 body-font relative">
+                                                <div class="container px-5 py-24 mx-auto">
+                                                    <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                                                        <div class="relative">
+                                                            <label for="name" class="leading-7 text-sm text-gray-600">Title</label>
+                                                            <input type="text" id="name" name="name" value={this.state.title} onChange={(event)=>this.setState({title:event.target.value})} class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                                                        </div>
+                                                        <div class="p-2 w-full">
+                                                            <div class="relative">
+                                                              <label for="message" class="leading-7 text-sm text-gray-600">Body</label>
+                                                              <textarea id="message" name="message" value={this.state.body} onChange={(event)=>this.setState({body:event.target.value})} class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-2 w-full">
+                                                            <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onClick={()=>this.update(index)}>Save</button>
+                                                        </div>
+                                                        <div class="p-2 w-full">
+                                                            <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"  onClick={()=>this.chosen()}>Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </Modal>
+                                    </div>
+                                    <div class="md:flex-grow">
+                                        <h2 class="text-2xl font-medium  title-font mb-2"><p >{item.title}</p></h2>
+                                        <p class="leading-relaxed">{item.body}</p>
+                                        <p class="leading-relaxed inline-flex items-center mt-4" id='blog' onClick={()=>this.comments(index)}>Comments
+                                          <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M5 12h14"></path>
+                                            <path d="M12 5l7 7-7 7"></path>
+                                          </svg>
+                                        </p>
+                                        {this.state.edit !==false? 
+                                              <Comments index={this.props.item} />    : null
+                                        }  
+                                    </div>
+                                    <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                              <div className='close' onClick={()=>this.remove(index)}><AiOutlineClose/></div>
+                          </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                ))}
             </div>
         )
     }
 }
-// export default Base
 const mapStateToProps = state =>{
     const {posts} =state.posts;
     const {users}= state.users;
@@ -141,36 +181,10 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = (dispatch) =>{
     return{
         myPosts: (payload)  =>dispatch(myPosts(payload)),
-        updatePosts : (payload, index) => dispatch(updatePosts(payload, index)),
+        updatePosts : (title,body,index) => dispatch(updatePosts(title,body, index)),
         postedit: (index) => dispatch(postedit(index)),
     }
 }
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(Posts)
-
-// <table>
-//                 <tbody>
-//                     {posts.map((item,index)=>(
-//                         <tr key={index} className='user'>
-//                             {item.edit === false ?
-//                             <td style={{color:'green'}} onClick={()=>this.changeIndex(index)}>{item.title}{item.body} </td>
-//                             // <td>{item.body}</td>
-//                             :
-//                             <td>
-//                                 <input 
-//                                     type='text'
-//                                     placeholder={item.title}
-//                                     value={this.state.title}
-//                                     onChange={(event)=> this.setState({title:event.target.value})}
-//                                     />
-//                                 <button onClick={()=>this.update(index)}>Save</button>
-//                             </td>}
-//                            {/* <td style={{color:'green'}} onClick={()=>this.setState({edit:true})}>{item.title} </td> */}
-//                            <td><button className='delete' onClick={()=>this.remove(index)} >Delete</button></td>
-//                         </tr>
-                            
-                        
-//                         ))}
-//                </tbody>
-//             </table>

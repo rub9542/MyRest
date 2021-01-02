@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 // import axios from 'axios'
+import {AiOutlineClose} from "react-icons/ai";
 import './base.css';
 import {connect} from 'react-redux';
 import { myComments, editComments, commentedit } from '../Actions/index';
@@ -73,9 +74,9 @@ export class Comments extends Component {
                 
                         {comments.map((item,index)=>(
                             <section class="text-gray-600 body-font overflow-hidden" key={index}>
-                            <div class="container px-5 py-24 mx-auto">
-                              <div class="-my-8 divide-y-2 divide-gray-100">
-                                <div class="py-8 flex flex-wrap md:flex-nowrap" id='blog'>
+                            <div class="container px-5 py-24 mx-auto" id='blog2'>
+                              <div class="-my-8 divide-y-2 divide-gray-100" >
+                                <div class="py-8 flex flex-wrap md:flex-nowrap" >
                                   <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                                     <span class="font-semibold title-font ">{item.email}</span>
                                   </div>
@@ -83,7 +84,10 @@ export class Comments extends Component {
                                     <h2 class="text-2xl font-medium  title-font mb-2">{item.name}</h2>
                                     <p class="leading-relaxed">{item.body}</p>
                                   
-                                  </div>
+        
+                                  </div><div id='close1' class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                              <div  onClick={()=>this.remove(index)}><AiOutlineClose/></div>
+                          </div>
                                 </div>
                                
                             
