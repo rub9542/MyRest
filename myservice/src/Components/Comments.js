@@ -20,7 +20,8 @@ export class Comments extends Component {
     
    
     async getList () {
-        const url ='https://jsonplaceholder.typicode.com/posts/1/comments';
+        console.log('id recieved at comments', this.props.Id);
+        const url ='https://jsonplaceholder.typicode.com/posts/'+this.props.index+'/comments';
         const response = await fetch(url);
         const data = await response.json();
         
@@ -108,9 +109,10 @@ const mapStateToProps = state =>{
     // const {posts} = state.posts;
     // const {albums} = state.albums;
     const {comments} = state.comments;
-    // const {todos} = state.todos;
+    const Id = state.postId;
     return{
         comments,
+        Id,
     }
 }
 const mapDispatchToProps = (dispatch) =>{

@@ -1,7 +1,5 @@
 
 import React, { Component } from 'react';
-// import axios from 'axios'
-import './base.css';
 import {connect} from 'react-redux';
 import {  myAlbums, updateAlbums, albumEdit } from '../Actions/index';
 import AlbumModal from './albumModal';

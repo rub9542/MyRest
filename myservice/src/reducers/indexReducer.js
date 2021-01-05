@@ -9,6 +9,11 @@ const indexReducer = (state=INITIAL_STATE, action)=>{
             return{
                 index:action.payload
             }
+        case 'NO_INDEX':
+            console.log('NO index', action.payload);
+            return{
+                index:''
+            }
         default:return state
     }
 }

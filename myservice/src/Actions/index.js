@@ -4,6 +4,28 @@ export const myIndex = (payload)=>{
         payload,
     }
 }
+export const noIndex = (item)=>{
+    return{
+        type:'NO_INDEX',
+        item,
+        
+    }
+}
+export const albumIndex = (payload)=>{
+    return{
+        type:'ALBUM_INDEX',
+        payload,
+        
+    }
+}
+
+export const postid = (payload)=>{
+    return{
+        type:'POST_ID',
+        payload,
+    }
+}
+
 
 export const myPosts = (items) =>{
     return    {

@@ -5,7 +5,7 @@ import axios from 'axios'
 import {AiOutlineClose} from "react-icons/ai";
 import './profile.css';
 import {connect} from 'react-redux';
-import { myPosts, postedit, updatePosts } from '../Actions';
+import { myPosts, postedit, updatePosts, postid } from '../Actions';
 // import posts from './posts';
 import PostsModal from './PostsModal';
 import Comments  from './Comments';
@@ -72,23 +72,17 @@ export class Posts extends Component {
             body:'',
             modal:!this.state.modal,
         })
-        // const posts = this.props.posts;
-        // for(let i=0; i<posts.length; i++){
-        //     if(i=== index){
-        //         console.log('i matched')
-        //         posts[i].title= this.state.title;
-        //         posts[i].body = this.state.body
-        //         console.log('i is', posts[i])
-        //     }
-        // }
-        // this.props.myPosts(posts);
     }
     comments = (index) =>{
         this.setState({
-            point:index,
+            point:index+1,
             edit:!this.state.edit
 
         })
+        this.props.postedit(index)
+        console.log('chosen index', this.state.point);
+        this.props.postid(index+1)
+        console.log('post id sent', index+1);
         console.log('comments clicked',index);
 
     }
@@ -98,6 +92,7 @@ export class Posts extends Component {
             index:index1,
             modal:!this.state.modal,
         })
+
         
     }
     render() {
@@ -152,12 +147,12 @@ export class Posts extends Component {
                                             <path d="M12 5l7 7-7 7"></path>
                                           </svg>
                                         </p>
-                                        {this.state.edit !==false? 
-                                              <Comments index={this.props.item} />    : null
+                                        {item.edit !==false? 
+                                            <Comments index={index+1} />    : null
                                         }  
                                     </div>
-                                    <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                              <div className='close' onClick={()=>this.remove(index)}><AiOutlineClose/></div>
+                                    <div class="close w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-200 text-indigo-500 mb-4">
+                              <div  onClick={()=>this.remove(index)}><AiOutlineClose/></div>
                           </div>
                                 </div>
                             </div>
@@ -171,7 +166,7 @@ export class Posts extends Component {
 const mapStateToProps = state =>{
     const {posts} =state.posts;
     const {users}= state.users;
-    const {index} =state.index;
+    const {index} =state.userIndex;
     return{
         posts,
         users,
@@ -183,6 +178,7 @@ const mapDispatchToProps = (dispatch) =>{
         myPosts: (payload)  =>dispatch(myPosts(payload)),
         updatePosts : (title,body,index) => dispatch(updatePosts(title,body, index)),
         postedit: (index) => dispatch(postedit(index)),
+        postid:(index) => dispatch(postid(index)),
     }
 }
 

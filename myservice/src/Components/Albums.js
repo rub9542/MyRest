@@ -2,11 +2,14 @@ import {AiOutlineClose} from "react-icons/ai";
 import Modal from 'react-modal'
 
 import React, { Component } from 'react';
-// import axios from 'axios'
-import './base.css';
+import { IoImagesOutline } from "react-icons/io5";
+import './profile.css';
 import {connect} from 'react-redux';
-import {  myAlbums, updateAlbums, albumEdit } from '../Actions/index';
+import {  myAlbums, updateAlbums, albumEdit, albumIndex } from '../Actions/index';
 import AlbumModal from './albumModal';
+import { Comments } from "./Comments";
+import Photos  from "./Photos";
+import { Link, Router } from "react-router-dom";
 
 export class Albums extends Component {
     constructor(props) {
@@ -17,6 +20,7 @@ export class Albums extends Component {
              text:[],
              edit:false,
              title:'',
+             getIndex:'',
         }
     }
     async getList () {
@@ -65,6 +69,22 @@ export class Albums extends Component {
             title:'',
         })
     }
+    changeIndex=(index) =>{
+        // this.props.albumEdit(index);
+        console.log('chosen index', index)
+        this.setState({
+            modal:!this.state.modal,
+        })
+    }
+    select =(index)=>{
+        console.log('album clicked', index)
+        this.setState({
+            getIndex:index,
+        })
+        this.props.albumIndex(index+1);
+        console.log('album index is',index)
+
+    }
     chosen = (index1) =>{
         console.log('edit index', index1)
         this.setState({
@@ -75,65 +95,45 @@ export class Albums extends Component {
     }
     render() {
         const albums = this.props.albums;
-        console.log('photos are',albums)
+        console.log('albums recieved',albums)
         return (
             <div>
-                Albums:
                 {/* <AlbumModal/> */}
-               
-                  <section class="text-gray-600 body-font">
-                  <div class=" px-5 py-24 mx-auto">
-                    <div class="flex flex-wrap w-full mb-20 flex-col items-center text-center">
-                      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Albums</h1>
-                      <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table.</p>
-                    
-                    </div>
-                    
-                    <div class="flex flex-wrap -m-4">
-                    {albums.map((item,index)=>(
-                      <div class="xl:w-1/3 md:w-1/2 p-4 container">
-                        <div class="border border-gray-200 p-6 rounded-lg">
-                          <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                              <div className='close' onClick={()=>this.remove(index)}><AiOutlineClose/></div>
-                          </div>
-                          <h2 class="text-lg text-gray-900 font-medium title-font mb-2">{item.title}</h2>
-                          <h2 id='blog' onClick={()=>this.chosen(index)}>Edit</h2>
-                          {/* <p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway tile poke farm.</p> */}
-                        </div>
-                        <Modal isOpen={this.state.modal}>
-                                            <section class="text-gray-600 body-font relative">
-                                                <div class="container px-5 py-24 mx-auto">
-                                                    <div class="lg:w-1/2 md:w-2/3 mx-auto">
-                                                        <div class="relative">
-                                                            <label for="name" class="leading-7 text-sm text-gray-600">Title</label>
-                                                            <input type="text" id="name" name="name" value={this.state.title} onChange={(event)=>this.setState({title:event.target.value})} class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
-                                                        </div>
-                                                        
-                                                        <div class="p-2 w-full">
-                                                            <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onClick={()=>this.update(index)}>Save</button>
-                                                        </div>
-                                                        <div class="p-2 w-full">
-                                                            <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"  onClick={()=>this.chosen()}>Cancel</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </Modal>
-                      </div>))}
-                      
-                    
-                      
-                     
-                    </div>
-                    {/* <button class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button> */}
-                  </div>
-                </section>
-              
-              
-             
-              
-                       
-                    
+                <section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class=" album flex flex-wrap -m-4">{albums.map((item,index)=>(
+      <div class="blog1 p-4 lg:w-1/3" key={index} >
+          
+        <div class="album h-full bg-gray-100   rounded-lg overflow-hidden text-center relative">
+        <div class="button  w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+             <div  onClick={()=>this.remove(index)}><AiOutlineClose/></div>
+         </div>
+          {/* <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2> */}
+          <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">{item.title}</h1>
+          {/* <p class="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p> */}
+          <div class="flex md:ml-auto md:mr-0 mx-auto items-center flex-shrink-0 space-x-4" id='images'>
+                                <button class="bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
+                                    
+                                    <span class="ml-4 flex items-start flex-col leading-none">
+                                      <span class="text-4xl text-gray-600 mb-1" onClick={()=>this.changeIndex(index)}  ><IoImagesOutline/></span>
+                                    </span>
+                                </button>
+                                
+                            </div>
+          
+        </div>
+        <Modal isOpen={this.state.modal}>
+            <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" id='blog3' onClick={()=>this.changeIndex(index)}>
+                Exit
+            </button>
+            <Photos id={index+1}/>
+        </Modal>
+      </div>))}
+  
+  
+    </div>
+  </div>
+</section>
             </div>
         )
     }
@@ -142,11 +142,12 @@ const mapStateToProps = state =>{
     // const {users} = state.user;
     // const {posts} = state.posts;
     const {albums} = state.albums;
-    // const {photos} = state.;
-    const {index} = state.index;
+    const albumId = state.albumId;
+    const {index} = state.userIndex;
     return{
         albums,
         index,
+        albumId,
     }
 }
 const mapDispatchToProps = (dispatch) =>{
@@ -154,6 +155,7 @@ const mapDispatchToProps = (dispatch) =>{
         myAlbums: (payload)  =>dispatch( myAlbums(payload)),
         updateAlbums: (payload,index)  =>dispatch(updateAlbums(payload,index)),
         albumEdit: (index) => dispatch(albumEdit(index)),
+        albumIndex: (index) => dispatch(albumIndex(index)),
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Albums)
@@ -187,3 +189,24 @@ export default connect(mapStateToProps,mapDispatchToProps)(Albums)
 //     ))}
 // </tbody>
 // </table>
+
+
+{/* //  <Modal isOpen={this.state.modal}>
+                        //                     <section class="text-gray-600 body-font relative">
+                        //                         <div class="container px-5 py-24 mx-auto">
+                        //                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                        //                                 <div class="relative">
+                        //                                     <label for="name" class="leading-7 text-sm text-gray-600">Title</label>
+                        //                                     <input type="text" id="name" name="name" value={this.state.title} onChange={(event)=>this.setState({title:event.target.value})} class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+                        //                                 </div>
+                                                        
+                        //                                 <div class="p-2 w-full">
+                        //                                     <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onClick={()=>this.update(index)}>Save</button>
+                        //                                 </div>
+                        //                                 <div class="p-2 w-full">
+                        //                                     <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"  onClick={()=>this.chosen()}>Cancel</button>
+                        //                                 </div>
+                        //                             </div>
+                        //                         </div>
+                        //                     </section>
+                        //                 </Modal>  */}

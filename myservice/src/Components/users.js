@@ -107,7 +107,7 @@ export class Users extends Component {
         <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
         <h3 class="font-medium title-font mt-4 text-gray-900 text-lg"><p style={{color:'blue'}}>Profession :</p> <p style={{color:'gray'}}> {item.company.bs}</p></h3>
           <p class="leading-relaxed text-lg mb-4">Address: </p>
-          <p class="leading-relaxed text-lg mb-4">{item.address.street}, {item.address.suite},</p>
+          <p class="leading-relaxed text-lg mb-4">{item.address.street},</p>
           <p class="leading-relaxed text-lg mb-4">{item.address.city}, {item.address.zipcode}</p>
           <p class="leading-relaxed text-lg mb-4">Phone: {item.phone}</p>
           <div className='map'>
@@ -137,7 +137,7 @@ const mapStateToProps = state =>{
     // const {users} = state.user;
     // const {posts} = state.posts;
     const {users} = state.users;
-    const {index} = state.index
+    const {index} = state.userIndex
     // const {photos} = state.;
     // const {todos} = state.todos;
     return{

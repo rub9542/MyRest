@@ -1,13 +1,14 @@
 .App {
   min-height: 100vh;
   display: flex;
+  /* flex-direction: column; */
   justify-content: center;
   padding-top: 4%;
   background-color: dodgerblue;
   /* flex-direction:column; */
   /* background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%); */
 }
-
+/* 
 .left{
   flex: 1;
   display: flex;
@@ -15,8 +16,7 @@
   justify-content: center;
   background-color: currentColor;
   border: 1px solid red;
-  /* height: 100%; */
-}
+} */
 .options{
   display: flex;
   border: 1px solid;
@@ -48,55 +48,22 @@
 .buttons{
   display: flex;
   width: 60px;
+  align-self: center;
   height: 42px;
   border-radius: 59%;
   justify-content: center;
   align-items: center;
-  border: none;
-  color: coral;
-  margin-left: 58%;
-  position: fixed;
+  border: 1px solid;
+  /* border: none; */
+  color: rgb(99, 70, 180);;
+  /* margin-left: 58%; */
+  /* position: fixed;  */
 }
 .buttons:hover{
-  background-color: coral;
-  color: rebeccapurple;
-}
-.dropbtn{
-  background-color: #4caf50;
+  background-color:rgb(99, 70, 180);;
   color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
 }
-.dropdown{
-  position: relative;
-  display: inline-block;
-}
-.drop-content{
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0,2);
-  z-index: 1;
-}
-.drop-content a{
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.drop-content a:hover{
 
-  background-color: #f1f1f1;
-}
-.dropdown:hover .drop-content{
-  display: block;
-}
-.dropdown:hover .dropbtn{
-  background-color: #3e8e41;
-}
 /* .top{
   display: flex;
   border: 1px solid red;
@@ -109,8 +76,8 @@
   flex: 3;
   
 }
-.content{
+/* .content{
   display: flex;
   border:1px solid red;
   background-color: ghostwhite;
-}
+} */

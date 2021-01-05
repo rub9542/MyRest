@@ -108,7 +108,7 @@ const mapStateToProps = state =>{
 // const {users} = state.user;
 // const {posts} = state.posts;
 // const {albums} = state.albums;
-const {index} = state.index;
+const {index} = state.userIndex;
 const {todos} = state.todos;
 return{
     todos,
